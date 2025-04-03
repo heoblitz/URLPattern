@@ -3,11 +3,8 @@ import Foundation
 
 @URLPattern
 enum Deeplink {
-//  @URLPath("/post/{id}")
-//  case post(id: String)
-//  
-  @URLPath("/home/{id}/{name}")
-  case name(id: String, name: String)
+  @URLPath("/post/{id}/{name}")
+  case name(id: Int, name: String)
   
   @URLPath("/post/{id}/{name}/hi/{good}")
   case nameDetail(id: String, name: String, good: String)

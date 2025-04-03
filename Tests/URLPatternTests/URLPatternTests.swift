@@ -14,8 +14,6 @@ let testMacros: [String: Macro.Type] = [
 ]
 #endif
 
-
-
 final class URLPatternTests: XCTestCase {
     func testMacro() throws {
       assertMacroExpansion(
@@ -26,58 +24,70 @@ final class URLPatternTests: XCTestCase {
               case post(id: String)
               
               @URLPath("/post/{id}/{name}")
-              case name(id: String, name: String)
+              case name(id: String, name: Int)
           }
           """,
           expandedSource: """
           enum Deeplink {
               case post(id: String)
 
-              static func createFromURLpost(_ url: URL) -> Self? {
-                  let path = url.path
-                  let components = path.split(separator: "/")
+              static func post(_ url: URL) -> Self? {
+                  let inputPaths = url.pathComponents
+                  let patternPaths = ["/", "post", "{id}"]
 
-                  guard components.count == 2 else {
+                  guard isValidURLPaths(inputPaths: inputPaths, patternPaths: patternPaths) else {
                       return nil
                   }
 
-                  guard let id = components[1] as? String else {
-                      return nil
-                  }
+                  let id = inputPaths[2]
 
                   return .post(id: id)
               }
 
               case name(id: String, name: String)
 
-              static func createFromURLname(_ url: URL) -> Self? {
-                  let path = url.path
-                  let components = path.split(separator: "/")
+              static func name(_ url: URL) -> Self? {
+                  let inputPaths = url.pathComponents
+                  let patternPaths = ["/", "post", "{id}", "{name}"]
 
-                  guard components.count == 3 else {
+                  guard isValidURLPaths(inputPaths: inputPaths, patternPaths: patternPaths) else {
                       return nil
                   }
 
-                  guard let id = components[1] as? String else {
-                      return nil
-                  }
-                  guard let name = components[2] as? String else {
-                      return nil
-                  }
+                  let id = inputPaths[2]
+                  let name = inputPaths[3]
 
                   return .name(id: id, name: name)
               }
 
               init?(url: URL) {
-                  if let result = Self.createFromURLpost(url) {
-                                  self = result
-                                  return
+                  if let result = Self.post(url) {
+                      self = result
+                      return
                   }
-                  if let result = Self.createFromURLname(url) {
-                                  self = result
-                                  return
+                  if let result = Self.name(url) {
+                      self = result
+                      return
                   }
                   return nil
+              }
+
+              static func isValidURLPaths(inputPaths inputs: [String], patternPaths patterns: [String]) -> Bool {
+                guard inputs.count == patterns.count else {
+                    return false
+                }
+
+                return zip(inputs, patterns).allSatisfy { input, pattern in
+                  guard pattern.isURLPathParam else {
+                      return input == pattern
+                  }
+
+                  return true
+                }
+              }
+
+              static func isURLPathParam(_ string: String) -> Bool {
+                return string.hasPrefix("{") && string.hasSuffix("}")
               }
           }
           """,

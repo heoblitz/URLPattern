@@ -4,10 +4,6 @@ import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 import Foundation
 
-enum MacroError: Error {
-  case message(String)
-}
-
 public struct URLPatternMacro: MemberMacro {
   public static func expansion(
     of node: AttributeSyntax,
@@ -15,16 +11,16 @@ public struct URLPatternMacro: MemberMacro {
     in context: some MacroExpansionContext
   ) throws -> [DeclSyntax] {
     guard let enumDecl = declaration.as(EnumDeclSyntax.self) else {
-      throw MacroError.message("This macro can only be applied to enums")
+      throw URLPatternError("@URLPatternMacro can only be applied to enums")
     }
     
     let urlInitializer = try InitializerDeclSyntax("init?(url: URL)") {
       for caseDecl in enumDecl.memberBlock.members.compactMap({ $0.decl.as(EnumCaseDeclSyntax.self) }) {
         if let caseName = caseDecl.elements.first?.name.text {
           """
-          if let result = Self.\(raw: caseName)(url) {
-              self = result
-              return
+          if let urlPattern = Self.\(raw: caseName)(url) {
+            self = urlPattern
+            return
           }
           """
         }
@@ -40,7 +36,7 @@ public struct URLPatternMacro: MemberMacro {
         guard inputs.count == patterns.count else { return false }
         
         return zip(inputs, patterns).allSatisfy { input, pattern in
-          guard pattern.isURLPathParam else { return input == pattern }
+          guard Self.isURLPathParam(pattern) else { return input == pattern }
           
           return true
         }
@@ -49,10 +45,14 @@ public struct URLPatternMacro: MemberMacro {
     
     let isURLPathParamMethod = try FunctionDeclSyntax("""
       static func isURLPathParam(_ string: String) -> Bool {
-        return string.hasPrefix("{") && string.hasSuffix("}") }
+        return string.hasPrefix("{") && string.hasSuffix("}")
       }
       """)
     
-    return [DeclSyntax(urlInitializer), DeclSyntax(isValidURLPathsMethod), DeclSyntax(isURLPathParamMethod)]
+    return [
+      DeclSyntax(urlInitializer),
+      DeclSyntax(isValidURLPathsMethod),
+      DeclSyntax(isURLPathParamMethod)
+    ]
   }
 }

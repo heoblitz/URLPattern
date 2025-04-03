@@ -11,10 +11,14 @@ enum Deeplink {
   
   @URLPath("/post/{id}")
   case nameDetailHI(id: String)
+  
+  @URLPath("/home")
+  case home
 }
 
 let url1 = URL(string: "https://channel.io/post/12/12")
 let url2 = URL(string: "/post/hi/hello/hi/bye")
+let url3 = URL(string: "/home")
 
 // enumPath
 // inputPath
@@ -29,4 +33,5 @@ let paths = url1!.pathComponents
 
 print(Deeplink(url: url1!))
 print(Deeplink(url: url2!))
+print(Deeplink(url: url3!))
 

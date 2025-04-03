@@ -107,8 +107,10 @@ public struct URLPathMacro: PeerMacro {
             """
             }
           }.joined(separator: "\n"))
-          
-        return .\(raw: element.name.text)(\(raw: patternParams.map { "\($0.name): \($0.name)" }.joined(separator: ", ")))
+      
+        return \(raw: patternParams.isEmpty
+        ? ".\(element.name.text)"
+        : ".\(element.name.text)(\(patternParams.map { "\($0.name): \($0.name)" }.joined(separator: ", ")))")
       }
       """)
     

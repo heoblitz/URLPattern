@@ -11,6 +11,8 @@
 		EF43E64B2D9ED8A800809F76 /* URLPattern in Frameworks */ = {isa = PBXBuildFile; productRef = EF43E64A2D9ED8A800809F76 /* URLPattern */; };
 		EF43E64D2D9ED8A800809F76 /* URLPatternClient in Frameworks */ = {isa = PBXBuildFile; productRef = EF43E64C2D9ED8A800809F76 /* URLPatternClient */; };
 		EF43E6502D9ED93E00809F76 /* URLPattern in Frameworks */ = {isa = PBXBuildFile; productRef = EF43E64F2D9ED93E00809F76 /* URLPattern */; };
+		EF43E72D2D9FE2C300809F76 /* URLPattern in Frameworks */ = {isa = PBXBuildFile; productRef = EF43E72C2D9FE2C300809F76 /* URLPattern */; };
+		EF43E7302D9FE2CC00809F76 /* URLPattern in Frameworks */ = {isa = PBXBuildFile; productRef = EF43E72F2D9FE2CC00809F76 /* URLPattern */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF43E72D2D9FE2C300809F76 /* URLPattern in Frameworks */,
 				EF43E6482D9ED87500809F76 /* URLPattern in Frameworks */,
 				EF43E64D2D9ED8A800809F76 /* URLPatternClient in Frameworks */,
 				EF43E64B2D9ED8A800809F76 /* URLPattern in Frameworks */,
@@ -57,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF43E7302D9FE2CC00809F76 /* URLPattern in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +72,7 @@
 			children = (
 				EF43E61B2D9ED86000809F76 /* URLPatternExample */,
 				EF43E62C2D9ED86100809F76 /* URLPatternExampleTests */,
+				EF43E72E2D9FE2CC00809F76 /* Frameworks */,
 				EF43E61A2D9ED86000809F76 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,6 +84,13 @@
 				EF43E6292D9ED86100809F76 /* URLPatternExampleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EF43E72E2D9FE2CC00809F76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,6 +117,7 @@
 				EF43E64A2D9ED8A800809F76 /* URLPattern */,
 				EF43E64C2D9ED8A800809F76 /* URLPatternClient */,
 				EF43E64F2D9ED93E00809F76 /* URLPattern */,
+				EF43E72C2D9FE2C300809F76 /* URLPattern */,
 			);
 			productName = URLPatternExample;
 			productReference = EF43E6192D9ED86000809F76 /* URLPatternExample.app */;
@@ -128,6 +141,7 @@
 			);
 			name = URLPatternExampleTests;
 			packageProductDependencies = (
+				EF43E72F2D9FE2CC00809F76 /* URLPattern */,
 			);
 			productName = URLPatternExampleTests;
 			productReference = EF43E6292D9ED86100809F76 /* URLPatternExampleTests.xctest */;
@@ -148,7 +162,6 @@
 					};
 					EF43E6282D9ED86100809F76 = {
 						CreatedOnToolsVersion = 16.2;
-						TestTargetID = EF43E6182D9ED86000809F76;
 					};
 				};
 			};
@@ -162,7 +175,7 @@
 			mainGroup = EF43E6102D9ED86000809F76;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				EF43E64E2D9ED93E00809F76 /* XCLocalSwiftPackageReference "../../URLPattern" */,
+				EF43E72B2D9FE2C300809F76 /* XCLocalSwiftPackageReference "../../URLPattern" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF43E61A2D9ED86000809F76 /* Products */;
@@ -400,7 +413,6 @@
 		EF43E6412D9ED86100809F76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HK54HM2TC6;
@@ -412,14 +424,12 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/URLPatternExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/URLPatternExample";
 			};
 			name = Debug;
 		};
 		EF43E6422D9ED86100809F76 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HK54HM2TC6;
@@ -431,7 +441,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/URLPatternExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/URLPatternExample";
 			};
 			name = Release;
 		};
@@ -468,7 +477,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		EF43E64E2D9ED93E00809F76 /* XCLocalSwiftPackageReference "../../URLPattern" */ = {
+		EF43E72B2D9FE2C300809F76 /* XCLocalSwiftPackageReference "../../URLPattern" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../URLPattern;
 		};
@@ -489,6 +498,15 @@
 		};
 		EF43E64F2D9ED93E00809F76 /* URLPattern */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = URLPattern;
+		};
+		EF43E72C2D9FE2C300809F76 /* URLPattern */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = URLPattern;
+		};
+		EF43E72F2D9FE2CC00809F76 /* URLPattern */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF43E72B2D9FE2C300809F76 /* XCLocalSwiftPackageReference "../../URLPattern" */;
 			productName = URLPattern;
 		};
 /* End XCSwiftPackageProductDependency section */

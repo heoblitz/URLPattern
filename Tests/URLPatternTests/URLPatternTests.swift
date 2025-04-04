@@ -130,7 +130,7 @@ final class URLPatternTests: XCTestCase {
           }
 
           static func isURLPathValue(_ string: String) -> Bool {
-              return string.hasPrefix("{") && string.hasSuffix("}")
+              return string.hasPrefix("{") && string.hasSuffix("}") && string.utf16.count >= 3
           }
       }
       """,
@@ -189,7 +189,7 @@ final class URLPatternTests: XCTestCase {
           }
 
           static func isURLPathValue(_ string: String) -> Bool {
-              return string.hasPrefix("{") && string.hasSuffix("}")
+              return string.hasPrefix("{") && string.hasSuffix("}") && string.utf16.count >= 3
           }
       }
       """,

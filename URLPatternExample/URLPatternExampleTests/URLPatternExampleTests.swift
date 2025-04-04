@@ -221,13 +221,14 @@ struct URLPatternExampleTests {
     "こんにちは",
     "☺️👍"
   ])
+  
   func paresPost_success_with_unicode(value: String) async throws {
     let url = try #require(URL(string: "/posts/\(value)"))
     let deepLink = DeepLinkMock(url: url)
     #expect(deepLink == .post(postId: value))
   }
   
-  // MARK: - Unicode Tests
+  // MARK: - Priority Tests
   @URLPattern
   enum PriorityTest: Equatable {
     @URLPath("/{a}/{b}")
@@ -237,11 +238,13 @@ struct URLPatternExampleTests {
     case post(postId: Int)
   }
   
-  @Test func checkPriorityCases() async throws {
+  @Test("Test Scope")
+  func checkPriorityCases() async throws {
     let url = try #require(URL(string: "/post/1"))
     #expect(PriorityTest(url: url) == .all(a: "post", b: "1"))
   }
   
+  // MARK: - Scope Tests
   @URLPattern
   enum ScopeTest {
     @URLPath("/")
@@ -277,6 +280,7 @@ struct URLPatternExampleTests {
     @URLPath("/{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}")
     case ten(a: String, b: String, c: String, d: String, e: String, f: String, g: String, h: String, i: String, j: String)
   }
+  
   @Test("Test scope", arguments: Array(0...20))
   func checkScope(num: Int) async throws {
     let url = try #require(URL(string: "/" + (0..<num).map { String($0) }.joined(separator: "/")))

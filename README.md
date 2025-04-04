@@ -1,5 +1,7 @@
 # URLPattern
 [![Swift](https://github.com/heoblitz/URLPattern/actions/workflows/swift.yml/badge.svg?branch=main)](https://github.com/heoblitz/URLPattern/actions/workflows/swift.yml)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fheoblitz%2FURLPattern%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/heoblitz/URLPattern)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fheoblitz%2FURLPattern%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/heoblitz/URLPattern)
 
 A Swift Macro that helps mapping URLs to Enum cases.
 

@@ -22,7 +22,7 @@ jobs:
     - name: Test URLPatternExample
       run: |
         xcodebuild \
-          -project ./URLPatternExample/URLPatternExample.xcodeproj \
+          -project URLPatternExample/URLPatternExample.xcodeproj \
           -scheme URLPatternExample \
           -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
           test

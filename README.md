@@ -92,7 +92,7 @@ if let deepLink = DeepLink(url: incomingURL) {
 }
 ```
 5. Implement a deep link using an enum switch statement.
-- For more detailed examples, please refer to the [Example project](https://github.com/heoblitz/URLPattern/tree/feature/main/URLPatternExample).
+- For more detailed examples, please refer to the [Example project](https://github.com/heoblitz/URLPattern/tree/main/URLPatternExample).
 
 ## Rules
 

@@ -51,15 +51,15 @@ public struct URLPatternMacro: MemberMacro {
           guard inputs.count == patterns.count else { return false }
         
           return zip(inputs, patterns).allSatisfy { input, pattern in
-              guard Self.isURLPathParam(pattern) else { return input == pattern }
+              guard Self.isURLPathValue(pattern) else { return input == pattern }
            
               return true
           }
       }
       """)
     
-    let isURLPathParamMethod = try FunctionDeclSyntax("""
-      static func isURLPathParam(_ string: String) -> Bool {
+    let isURLPathValueMethod = try FunctionDeclSyntax("""
+      static func isURLPathValue(_ string: String) -> Bool {
           return string.hasPrefix("{") && string.hasSuffix("}")
       }
       """)
@@ -67,7 +67,7 @@ public struct URLPatternMacro: MemberMacro {
     return [
       DeclSyntax(urlInitializer),
       DeclSyntax(isValidURLPathsMethod),
-      DeclSyntax(isURLPathParamMethod)
+      DeclSyntax(isURLPathValueMethod)
     ]
   }
 }

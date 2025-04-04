@@ -55,7 +55,7 @@ public struct URLPathMacro: PeerMacro {
     } ?? []
     
     let patternParams: [PatternParam] = try patternPaths.enumerated()
-      .filter { index, value in value.isURLPathParam }
+      .filter { index, value in value.isURLPathValue }
       .map { pathIndex, value -> PatternParam in
         let name = String(value.dropFirst().dropLast())
         

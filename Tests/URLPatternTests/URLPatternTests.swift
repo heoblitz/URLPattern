@@ -121,7 +121,7 @@ final class URLPatternTests: XCTestCase {
               }
 
               return zip(inputs, patterns).allSatisfy { input, pattern in
-                  guard Self.isURLPathParam(pattern) else {
+                  guard Self.isURLPathValue(pattern) else {
                       return input == pattern
                   }
 
@@ -129,7 +129,7 @@ final class URLPatternTests: XCTestCase {
               }
           }
 
-          static func isURLPathParam(_ string: String) -> Bool {
+          static func isURLPathValue(_ string: String) -> Bool {
               return string.hasPrefix("{") && string.hasSuffix("}")
           }
       }
@@ -180,7 +180,7 @@ final class URLPatternTests: XCTestCase {
               }
 
               return zip(inputs, patterns).allSatisfy { input, pattern in
-                  guard Self.isURLPathParam(pattern) else {
+                  guard Self.isURLPathValue(pattern) else {
                       return input == pattern
                   }
 
@@ -188,7 +188,7 @@ final class URLPatternTests: XCTestCase {
               }
           }
 
-          static func isURLPathParam(_ string: String) -> Bool {
+          static func isURLPathValue(_ string: String) -> Bool {
               return string.hasPrefix("{") && string.hasSuffix("}")
           }
       }

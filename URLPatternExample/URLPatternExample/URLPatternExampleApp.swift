@@ -11,7 +11,7 @@ import SwiftUI
 struct URLPatternExampleApp: App {
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      RootView()
     }
   }
 }

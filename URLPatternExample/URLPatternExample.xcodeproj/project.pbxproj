@@ -21,19 +21,11 @@
 			remoteGlobalIDString = EF43E6182D9ED86000809F76;
 			remoteInfo = URLPatternExample;
 		};
-		EF43E6342D9ED86100809F76 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EF43E6112D9ED86000809F76 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = EF43E6182D9ED86000809F76;
-			remoteInfo = URLPatternExample;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		EF43E6192D9ED86000809F76 /* URLPatternExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLPatternExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF43E6292D9ED86100809F76 /* URLPatternExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLPatternExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF43E6332D9ED86100809F76 /* URLPatternExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLPatternExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -68,13 +60,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EF43E6302D9ED86100809F76 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -92,7 +77,6 @@
 			children = (
 				EF43E6192D9ED86000809F76 /* URLPatternExample.app */,
 				EF43E6292D9ED86100809F76 /* URLPatternExampleTests.xctest */,
-				EF43E6332D9ED86100809F76 /* URLPatternExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,26 +133,6 @@
 			productReference = EF43E6292D9ED86100809F76 /* URLPatternExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		EF43E6322D9ED86100809F76 /* URLPatternExampleUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EF43E6432D9ED86100809F76 /* Build configuration list for PBXNativeTarget "URLPatternExampleUITests" */;
-			buildPhases = (
-				EF43E62F2D9ED86100809F76 /* Sources */,
-				EF43E6302D9ED86100809F76 /* Frameworks */,
-				EF43E6312D9ED86100809F76 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				EF43E6352D9ED86100809F76 /* PBXTargetDependency */,
-			);
-			name = URLPatternExampleUITests;
-			packageProductDependencies = (
-			);
-			productName = URLPatternExampleUITests;
-			productReference = EF43E6332D9ED86100809F76 /* URLPatternExampleUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -183,10 +147,6 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					EF43E6282D9ED86100809F76 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = EF43E6182D9ED86000809F76;
-					};
-					EF43E6322D9ED86100809F76 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = EF43E6182D9ED86000809F76;
 					};
@@ -211,7 +171,6 @@
 			targets = (
 				EF43E6182D9ED86000809F76 /* URLPatternExample */,
 				EF43E6282D9ED86100809F76 /* URLPatternExampleTests */,
-				EF43E6322D9ED86100809F76 /* URLPatternExampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -225,13 +184,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		EF43E6272D9ED86100809F76 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EF43E6312D9ED86100809F76 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,13 +207,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EF43E62F2D9ED86100809F76 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -269,11 +214,6 @@
 			isa = PBXTargetDependency;
 			target = EF43E6182D9ED86000809F76 /* URLPatternExample */;
 			targetProxy = EF43E62A2D9ED86100809F76 /* PBXContainerItemProxy */;
-		};
-		EF43E6352D9ED86100809F76 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = EF43E6182D9ED86000809F76 /* URLPatternExample */;
-			targetProxy = EF43E6342D9ED86100809F76 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -465,7 +405,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HK54HM2TC6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heoblitz.URLPatternExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,7 +424,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HK54HM2TC6;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.heoblitz.URLPatternExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -492,40 +432,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/URLPatternExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/URLPatternExample";
-			};
-			name = Release;
-		};
-		EF43E6442D9ED86100809F76 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HK54HM2TC6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.heoblitz.URLPatternExampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = URLPatternExample;
-			};
-			name = Debug;
-		};
-		EF43E6452D9ED86100809F76 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HK54HM2TC6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.heoblitz.URLPatternExampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = URLPatternExample;
 			};
 			name = Release;
 		};
@@ -555,15 +461,6 @@
 			buildConfigurations = (
 				EF43E6412D9ED86100809F76 /* Debug */,
 				EF43E6422D9ED86100809F76 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EF43E6432D9ED86100809F76 /* Build configuration list for PBXNativeTarget "URLPatternExampleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EF43E6442D9ED86100809F76 /* Debug */,
-				EF43E6452D9ED86100809F76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

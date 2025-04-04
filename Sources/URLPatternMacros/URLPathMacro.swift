@@ -16,6 +16,7 @@ public struct URLPathMacro: PeerMacro {
     let name: String
     let type: SupportedType
     let pathIndex: Int
+    let caseIndex: Int
   }
   
   public static func expansion(
@@ -53,53 +54,54 @@ public struct URLPathMacro: PeerMacro {
       return (name: name, type: supportedType)
     } ?? []
     
-    let patternParams = patternPaths.enumerated()
+    let patternParams: [PatternParam] = try patternPaths.enumerated()
       .filter { index, value in value.isURLPathParam }
-      .map { index, value in
+      .map { pathIndex, value -> PatternParam in
         let name = String(value.dropFirst().dropLast())
+        
+        guard let (caseIndex, caseAssociatedType) = caseAssociatedTypes.enumerated().first(where: { name == $0.element.name }) else {
+          throw URLPatternError("URLPath value \"\(name)\" cannot be found in the associated value")
+        }
+        
         return PatternParam(
-          name:name ,
-          type: caseAssociatedTypes.first(where: { name == $0.name })!.type,
-          pathIndex: index
+          name: name,
+          type: caseAssociatedType.type,
+          pathIndex: pathIndex,
+          caseIndex: caseIndex
         )
       }
+      .sorted(by: { $0.caseIndex < $1.caseIndex })
     
-    if Set(patternParams.map { $0.name }).count != patternParams.count {
+    let patternNames = Set(patternParams.map(\.name))
+    let caseNames = Set(caseAssociatedTypes.map(\.name))
+
+    guard patternNames.count == patternParams.count else {
+      throw URLPatternError("The name of an URLPath value cannot be duplicated")
+    }
+    
+    guard caseNames.count == caseAssociatedTypes.count else {
       throw URLPatternError("The name of an associated value cannot be duplicated")
     }
     
-    if Set(patternParams).count != caseAssociatedTypes.count {
+    guard patternNames.count == caseNames.count else {
       throw URLPatternError("The number of associated values does not match URLPath")
+    }
+    
+    guard patternNames == caseNames else {
+      throw URLPatternError("The name of the URLPath value does not match the associated value")
     }
     
     let staticMethod = try FunctionDeclSyntax("""
       static func \(element.name)(_ url: URL) -> Self? {
-        let inputPaths = url.pathComponents
-        let patternPaths = \(raw: patternPaths)
-      
-        guard isValidURLPaths(inputPaths: inputPaths, patternPaths: patternPaths) else {
-          return nil
-        }
-                
-        \(raw: patternParams.map { param in
+          let inputPaths = url.pathComponents
+          let patternPaths = \(raw: patternPaths)
+        
+          guard isValidURLPaths(inputPaths: inputPaths, patternPaths: patternPaths) else { return nil }
+          \(raw: patternParams.map { param in
           switch param.type {
-            case .Double:
+            case .Double, .Float, .Int:
             """
-            guard let \(param.name) = \(param.type.rawValue)(inputPaths[\(param.pathIndex)]) else {
-              return nil
-            }
-            """
-            case .Float:
-            """
-            guard let \(param.name) = \(param.type.rawValue)(inputPaths[\(param.pathIndex)]) else {
-              return nil
-            }
-            """
-            case .Int:
-            """
-            guard let \(param.name) = \(param.type.rawValue)(inputPaths[\(param.pathIndex)]) else {
-              return nil
-            }
+            guard let \(param.name) = \(param.type.rawValue)(inputPaths[\(param.pathIndex)]) else { return nil }
             """
             case .String:
             """
@@ -107,10 +109,9 @@ public struct URLPathMacro: PeerMacro {
             """
             }
           }.joined(separator: "\n"))
-      
-        return \(raw: patternParams.isEmpty
-        ? ".\(element.name.text)"
-        : ".\(element.name.text)(\(patternParams.map { "\($0.name): \($0.name)" }.joined(separator: ", ")))")
+          return \(raw: patternParams.isEmpty
+          ? ".\(element.name.text)"
+          : ".\(element.name.text)(\(patternParams.map { "\($0.name): \($0.name)" }.joined(separator: ", ")))")
       }
       """)
     

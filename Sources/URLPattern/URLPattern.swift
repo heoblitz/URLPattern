@@ -1,3 +1,5 @@
+@_exported import Foundation
+
 @attached(member, names: arbitrary)
 public macro URLPattern() = #externalMacro(module: "URLPatternMacros", type: "URLPatternMacro")
 

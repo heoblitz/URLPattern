@@ -4,10 +4,6 @@ import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 import Foundation
 
-enum MacroError: Error {
-  case message(String)
-}
-
 public struct URLPatternMacro: MemberMacro {
   public static func expansion(
     of node: AttributeSyntax,
@@ -15,19 +11,34 @@ public struct URLPatternMacro: MemberMacro {
     in context: some MacroExpansionContext
   ) throws -> [DeclSyntax] {
     guard let enumDecl = declaration.as(EnumDeclSyntax.self) else {
-      throw MacroError.message("This macro can only be applied to enums")
+      throw URLPatternError("@URLPatternMacro can only be applied to enums")
+    }
+    
+    let cases = enumDecl.memberBlock.members.compactMap { member -> String? in
+      guard
+        let caseDecl = member.decl.as(EnumCaseDeclSyntax.self),
+        caseDecl.attributes.contains(where: {
+          $0.as(AttributeSyntax.self)?.attributeName.as(IdentifierTypeSyntax.self)?.name.text == "URLPath"
+        })
+      else {
+        return nil
+      }
+      
+      return caseDecl.elements.first?.name.text
+    }
+    
+    guard Set(cases).count == cases.count else {
+      throw URLPatternError("Duplicate case names are not allowed")
     }
     
     let urlInitializer = try InitializerDeclSyntax("init?(url: URL)") {
-      for caseDecl in enumDecl.memberBlock.members.compactMap({ $0.decl.as(EnumCaseDeclSyntax.self) }) {
-        if let caseName = caseDecl.elements.first?.name.text {
-          """
-          if let result = Self.\(raw: caseName)(url) {
-              self = result
-              return
-          }
-          """
+      for caseName in cases {
+        """
+        if let urlPattern = Self.\(raw: caseName)(url) {
+            self = urlPattern
+            return
         }
+        """
       }
       
       """
@@ -37,22 +48,26 @@ public struct URLPatternMacro: MemberMacro {
     
     let isValidURLPathsMethod = try FunctionDeclSyntax("""
       static func isValidURLPaths(inputPaths inputs: [String], patternPaths patterns: [String]) -> Bool {
-        guard inputs.count == patterns.count else { return false }
+          guard inputs.count == patterns.count else { return false }
         
-        return zip(inputs, patterns).allSatisfy { input, pattern in
-          guard pattern.isURLPathParam else { return input == pattern }
-          
-          return true
-        }
+          return zip(inputs, patterns).allSatisfy { input, pattern in
+              guard Self.isURLPathValue(pattern) else { return input == pattern }
+           
+              return true
+          }
       }
       """)
     
-    let isURLPathParamMethod = try FunctionDeclSyntax("""
-      static func isURLPathParam(_ string: String) -> Bool {
-        return string.hasPrefix("{") && string.hasSuffix("}") }
+    let isURLPathValueMethod = try FunctionDeclSyntax("""
+      static func isURLPathValue(_ string: String) -> Bool {
+          return string.hasPrefix("{") && string.hasSuffix("}") && string.utf16.count >= 3
       }
       """)
     
-    return [DeclSyntax(urlInitializer), DeclSyntax(isValidURLPathsMethod), DeclSyntax(isURLPathParamMethod)]
+    return [
+      DeclSyntax(urlInitializer),
+      DeclSyntax(isValidURLPathsMethod),
+      DeclSyntax(isURLPathValueMethod)
+    ]
   }
 }

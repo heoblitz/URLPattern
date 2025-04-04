@@ -16,6 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set Xcode Version 16.1.0
+      run: sudo xcode-select -s /Applications/Xcode_16.1.app
+
     - name: Test URLPattern
       run: swift test -v
 

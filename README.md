@@ -5,6 +5,8 @@
 
 A Swift Macro that helps mapping URLs to Enum cases.
 
+https://github.com/user-attachments/assets/07bb37fd-f82f-43eb-b34a-ec9bed7f29c8
+
 ## Overview
 
 URL deep linking is a fundamental technology widely used in most services today. However, in Swift environments, implementing deep linking typically requires direct URL path manipulation or regex usage:
@@ -76,8 +78,8 @@ DeepLink(url: URL(string: "/posts/1/comments/2")!) == .postComment(postId: "1", 
 DeepLink(url: URL(string: "/f/1/s/2")!) == .postComment(second: 2, first: 1)
 
 // ❌ Invalid URLs
-DeepLink(url: URL(string: "/post/1")) == nil
-DeepLink(url: URL(string: "/posts/1/comments")) == nil
+DeepLink(url: URL(string: "/post/1")!) == nil
+DeepLink(url: URL(string: "/posts/1/comments")!) == nil
 DeepLink(url: URL(string: "/f/string/s/string")!) == nil
 ```
 4. Use the `Enum.init(url: URL)` generated initializer. 

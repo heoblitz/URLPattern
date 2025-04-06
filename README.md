@@ -75,7 +75,7 @@ enum DeepLink {
 // ✅ Valid URLs
 DeepLink(url: URL(string: "/posts/1")!) == .post(postId: "1")
 DeepLink(url: URL(string: "/posts/1/comments/2")!) == .postComment(postId: "1", commentId: "2")
-DeepLink(url: URL(string: "/f/1/s/2")!) == .postComment(second: 2, first: 1)
+DeepLink(url: URL(string: "/f/1/s/2")!) == .reverse(second: 2, first: 1)
 
 // ❌ Invalid URLs
 DeepLink(url: URL(string: "/post/1")!) == nil
@@ -83,7 +83,7 @@ DeepLink(url: URL(string: "/posts/1/comments")!) == nil
 DeepLink(url: URL(string: "/f/string/s/string")!) == nil
 ```
 4. Use the `Enum.init(url: URL)` generated initializer. 
-```
+```swift
 if let deepLink = DeepLink(url: incomingURL) {
   switch deepLink {
   case .post(let postId):
